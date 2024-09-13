@@ -9,4 +9,9 @@ This image consists of 2 values: `200g` and `1Kg`.
 
 ## Issue 2
 
-*Details about the second issue go here.*
+![Entity Image](https://m.media-amazon.com/images/I/41EjbFu-+yL.jpg)
+**Entity Value:** `item_weight`  
+**Expected Entity Value:** `10 kilogram`  
+
+easyocr extract wrong text, like,
+Text extracted from 41EjbFu-+yL: CANINE CREEK Clb Uattola

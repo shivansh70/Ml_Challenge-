@@ -1,6 +1,6 @@
 ## Issue 1
 
-![Entity Image](81e2YtCOKvL.jpg)
+![Entity Image](https://m.media-amazon.com/images/I/81e2YtCOKvL.jpg)
 
 **Entity Value:** `item_weight`  
 **Expected Entity Value:** `1 kilogram`  

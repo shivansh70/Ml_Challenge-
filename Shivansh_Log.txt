@@ -1,0 +1,18 @@
+1. Installed following libraries:
+      opencv-python
+      pytesseract
+      Pillow
+      scikit-learn
+      pandas
+      numpy
+2. Setup Path for tesseract OCR 
+3. Changes made in utils.py and test.ipynb[added fucnction extract_text_from_image and process_images_with_ocr]
+4. Error in test.ipynb:
+    [ ---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+Cell In[8], line 1
+----> 1 from utils import process_images_with_ocr
+      3 # Assuming `sample_test['image_link']` contains the links to the images
+      4 ocr_results = process_images_with_ocr(sample_test['image_link'], '../images')
+
+ImportError: cannot import name 'process_images_with_ocr' from 'utils' (c:\Users\DELL.000\Downloads\student_resource 3\src\utils.py)]

@@ -13,6 +13,9 @@ from functools import partial
 from PIL import Image
 import pytesseract
 
+########
+import easyocr
+
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  
 
@@ -48,6 +51,7 @@ def create_placeholder_image(image_save_path):
         return
 
 def download_image(image_link, save_folder, retries=3, delay=3):
+    
     if not isinstance(image_link, str):
         return
 
@@ -75,7 +79,7 @@ def download_images(image_links, download_folder, allow_multiprocessing=True):
         download_image_partial = partial(
             download_image, save_folder=download_folder, retries=3, delay=3)
 
-        with multiprocessing.Pool(64) as pool:
+        with multiprocessing.Pool(60) as pool:
             image_paths = list(tqdm(pool.imap(download_image_partial, image_links), total=len(image_links)))
             pool.close()
             pool.join()
@@ -110,6 +114,38 @@ def process_images_with_ocr(image_links, download_folder):
     
     for image_path in image_paths:
         text = extract_text_from_image(image_path)
+        ocr_results[Path(image_path).stem] = text 
+    
+    return ocr_results
+
+
+
+def process_images_with_ocr_justin(download_folder):
+    ocr_results = {}
+    image_paths = [str(file) for file in Path(download_folder).glob('*') if file.is_file() and file.suffix.lower() in ['.png', '.jpg', '.jpeg']]
+
+    
+    for image_path in image_paths:
+        text = extract_text_from_image(image_path)
+        ocr_results[Path(image_path).stem] = text 
+    
+    return ocr_results
+
+def process_images_with_easyocr(download_folder):
+    ocr_results = {}
+    image_paths = [str(file) for file in Path(download_folder).glob('*') if file.is_file() and file.suffix.lower() in ['.png', '.jpg', '.jpeg']]
+    
+    # Initialize EasyOCR Reader
+    reader = easyocr.Reader(['en'])
+
+    for image_path in image_paths:
+        # Perform OCR using EasyOCR
+        results = reader.readtext(image_path)
+        
+        # Extract text from results
+        text = ' '.join([result[1] for result in results])
+        
+        # Store the text with image name as key
         ocr_results[Path(image_path).stem] = text 
     
     return ocr_results

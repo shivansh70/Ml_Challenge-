@@ -149,17 +149,6 @@ def process_images_with_ocr(image_links, download_folder):
 
 
 
-def process_images_with_ocr_justin(download_folder):
-    ocr_results = {}
-    image_paths = [str(file) for file in Path(download_folder).glob('*') if file.is_file() and file.suffix.lower() in ['.png', '.jpg', '.jpeg']]
-
-    
-    for image_path in image_paths:
-        text = extract_text_from_image(image_path)
-        ocr_results[Path(image_path).stem] = text 
-    
-    return ocr_results
-
 def extract_quantitative_data(text):
     # Define a regex pattern to match numbers and units
     pattern = r'\b(\d+(\.\d+)?)\s*(' + '|'.join(re.escape(unit) for unit in ALLOWED_UNITS) + r')\b'

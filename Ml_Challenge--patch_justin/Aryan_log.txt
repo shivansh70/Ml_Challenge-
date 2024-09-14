@@ -1,0 +1,4 @@
+1. Resolved the issue of black images (changed the actual format to jpeg).
+2. Changed the multiprocessing pool to minimum of 10 and the count of CPUs available since the system hangs during the download of image, to ensure smooth download.
+3. Made changes in create_placeholder_image and download_image function.
+4. Added some new libraries to ensure smooth functioning.

@@ -11,7 +11,7 @@ import numpy as np
 from pathlib import Path
 from functools import partial
 from PIL import Image
-import pytesseract
+# import pytesseract
 
 
 ########
@@ -26,7 +26,7 @@ from urllib.error import URLError, HTTPError
 import requests
 from pathlib import Path
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  
 
 ALLOWED_UNITS = {'cubic inch', 'microlitre', 'milligram', 'decilitre', 'gallon', 'volt', 'litre', 'imperial gallon', 'watt', 'fluid ounce', 'gram', 'ton', 'millilitre', 'centimetre', 'kilogram', 'microgram', 'centilitre', 'yard', 'foot', 'cup', 'kilowatt', 'pound', 'kilovolt', 'ounce', 'cubic foot', 'millivolt', 'metre', 'inch', 'pint', 'millimetre', 'quart'}
 

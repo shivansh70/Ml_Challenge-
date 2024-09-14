@@ -2,3 +2,20 @@
 2. Changed the multiprocessing pool to minimum of 10 and the count of CPUs available since the system hangs during the download of image, to ensure smooth download.
 3. Made changes in create_placeholder_image and download_image function.
 4. Added some new libraries to ensure smooth functioning.
+5. Added new functions in utils.py for text extraction and also added the allowed_units.
+
+
+Issue - after extracting the data, it outputs raw data instead of quantitative data that should be outputted in this case. (test.ipynb)
+from utils import process_images_with_easyocr
+
+# Process images and extract quantitative data
+del_ocr_results = process_images_with_easyocr('../del_images')
+
+# Print extracted quantitative data
+for image_name, data in del_ocr_results.items():
+    print(f"Quantitative data extracted from {image_name}: {data}")
+Quantitative data extracted from 617Tl40LOXL: Horbaach' HIGH StRENGTH PSYLLIUM HUSK PLANTAGO OVATA 1400mG PLANT SEEDS FOOD VEGAN SUPPLEMENT 365 CAPSULES
+Quantitative data extracted from 61I9XdN6OFL: PROPOS' NATURE INGREDIENT MENAGER MULTI-USAGE TERRE dE SOMMIERES 4100% NATUREL Argile 10036 pure et   naturelle Lerre Sommierespreserte des proprietes absorbantes qui permettent nelloyage sec des laches recalcitrantes Sur toutes les surfaces (moquette; tapis; parquel_- Elle est aussi efficace desodoriser linge: Ingredient Bentonite Dosage conseille Sclon usage. S[Dan Lunponpace catl{ I 0t inunEi4 Wzouupl Rtiu fos; Lnfonr 00% R500 g Jusuc LABORATOIRE FROPOSNATURE UCUGRLDC . [uacoJi JHH4604 Jc+raaley 'Mp"0pr-nJincon 780 103 pour 'Pnz
+Quantitative data extracted from 61o2ntPNNgL: 28" 2 7 FREEWHEELS 800w 36V GABEL MINDESTBREITE 135MM HINTERRAD MIT BRUSHLESS MOTOR
+Quantitative data extracted from 71gSRbyXmoL: TLaelE=_ 7672 Xe RRIFIC LEBENSMITTELECHT Gw DAV GEPRAGTES DESIGN As YOULIKE BEST Designed in V cnre Y [Bextin ] LIZENZIERTE UND GESCHITZTE DESIGNS TEA WITH cccteics
+Quantitative data extracted from 81e2YtCOKvL: # Glucon-D KM FREE' Reguio 280g Glucon-D Net Weight: Instant Energy Ikg Occasions of use: In summer when the sun drains out energy or when hectic lifesiyle leaves You tired, your family needs the 'Instant Energy' of Glucon-D 99.4% pure Glucose Glucose is an Instant energy source for the body and is the only energy source for the brain. Vitamin Glucon-D has Vitamin D and Calcium that provides strength to the bones and body: Minerals Glucon-D has Phosphorus tat is essential for energy production and storage. So experience the 'Instant Energy' of Glucon-D with your familyl Adof 3R: 6 # %1401 9aR Vvot & rff & f #R & Hrria eraax dald & 378 rifeg Tool-&} & "ga %fart" ! 99.4% %& "{r & Joei &fad &1 & JR %8 RHT &} afa & aat $9HF Hiez &1 1 facifia 4{ Ae1f7 $ &k #RR, & &asui s1 IRi & w4g Tmal &1 Farer To-3} # & qRRR , &i <f9 1791a7 sik %ize & felg 31a41d?44 8 1 Tqoi7-&} & 'gra :ifar' HSTHEG_ #r} RaR 7e ! "Offer valid till stocks last Packs without this Offer also available. "Offer available in specifically marked only: We would love to hear from you: 7" Floor; "D" Shivsagar; Worli; Mumbal 4n0 018. Consumner Cell; Heinz India Pvt Ltd , cleedback@in hjhelnz com Toll Free No. 1800 102 5444 Visit us at: WWWheinzco in [consumer: LOT No; MFD . MRP Rs/R (NOL,OF ALL TAXES) (See space below bottom of jar.) (pack Gr: Fi Tort goh ToA-& packs 

@@ -24,8 +24,11 @@ import urllib.request
 import logging
 from urllib.error import URLError, HTTPError
 import requests
+from pathlib import Path
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  
+
+ALLOWED_UNITS = {'cubic inch', 'microlitre', 'milligram', 'decilitre', 'gallon', 'volt', 'litre', 'imperial gallon', 'watt', 'fluid ounce', 'gram', 'ton', 'millilitre', 'centimetre', 'kilogram', 'microgram', 'centilitre', 'yard', 'foot', 'cup', 'kilowatt', 'pound', 'kilovolt', 'ounce', 'cubic foot', 'millivolt', 'metre', 'inch', 'pint', 'millimetre', 'quart'}
 
 def common_mistake(unit):
     if unit in constants.allowed_units:
@@ -157,21 +160,29 @@ def process_images_with_ocr_justin(download_folder):
     
     return ocr_results
 
-def process_images_with_easyocr(download_folder):
-    ocr_results = {}
-    image_paths = [str(file) for file in Path(download_folder).glob('*') if file.is_file() and file.suffix.lower() in ['.png', '.jpg', '.jpeg']]
+def extract_quantitative_data(text):
+    # Define a regex pattern to match numbers and units
+    pattern = r'\b(\d+(\.\d+)?)\s*(' + '|'.join(re.escape(unit) for unit in ALLOWED_UNITS) + r')\b'
+    matches = re.findall(pattern, text, re.IGNORECASE)
     
-    # Initialize EasyOCR Reader
-    reader = easyocr.Reader(['en'])
+    # Format matches as a dictionary
+    quantitative_data = {match[2].lower(): match[0] for match in matches}
+    return quantitative_data
 
-    for image_path in image_paths:
-        # Perform OCR using EasyOCR
-        results = reader.readtext(image_path)
+def process_images_with_easyocr(images_path):
+    import easyocr
+    import os
+
+    reader = easyocr.Reader(['en'])
+    results = {}
+
+    for image_name in os.listdir(images_path):
+        image_path = os.path.join(images_path, image_name)
+        result = reader.readtext(image_path)
+        text = ' '.join([res[1] for res in result])
         
-        # Extract text from results
-        text = ' '.join([result[1] for result in results])
-        
-        # Store the text with image name as key
-        ocr_results[Path(image_path).stem] = text 
-    
-    return ocr_results
+        # Extract quantitative data
+        quantitative_data = extract_quantitative_data(text)
+        results[image_name] = quantitative_data
+
+    return results
